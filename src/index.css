@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root{
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+.active {
+  @apply font-medium tracking-wide text-lg text-accent transition-colors duration-200;
+}
+/* .active2 {
+  @apply font-bold text-3xl tracking-wide text-accent transition-colors duration-200;
+} */
+
+.default {
+  @apply font-medium text-lg tracking-wide text-primary transition-colors relative;
+}
+.default::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #121212; 
+  transition-property: width;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.default:hover::before {
+  width: 100%;
+}
+
+
+.btn-primary {
+  @apply  transition duration-300  shadow-md  md:mb-0  px-4 py-2 md:px-11 md:py-3 m-2 text-xl rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-primary;
+}
+/* 
+.default2 {
+  @apply text-2xl tracking-wide text-white transition-colors duration-200 hover:text-accent;
+} */
