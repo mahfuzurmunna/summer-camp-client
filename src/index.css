@@ -41,7 +41,7 @@
   @apply  transition duration-300  shadow-md  md:mb-0  px-4 py-2 md:px-11 md:py-3 m-2 text-xl rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-primary;
 }
 .btn-secondary {
-  @apply  transition duration-300  shadow-md  md:mb-0  px-16 lg:px-5 py-2 md:px-8 md:py-4 m-2   text-lg rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-accent;
+  @apply  transition duration-300  shadow-md  md:mb-0  px-16 lg:px-7 py-2 md:px-8 md:py-4 m-2   text-lg rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-accent;
 }
 
 

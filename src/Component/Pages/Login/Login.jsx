@@ -1,15 +1,31 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from "../../../assets/logo.png";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../AuthProiver/Authprovider';
 
 const Login = () => {
+  const { loginUser, googleLogin } = useContext(AuthContext);
+    const location = useLocation();
+   const from = location.state?.from.pathname || "/";
+   let navigate = useNavigate();
+  //  google authentication
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        return navigate(from, { replace: true });
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <div className=" px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-16 lg:px-8 lg:py-8">
-      <div className="border-2 grid justify-items-center ">
+      <div className=" grid justify-items-center ">
         <img src={logo} alt="" className="mb-4" />
-        <h2 className="text-3xl font-bold">Sign in to you account</h2>
-        <div className="p-14 bg-white shadow-lg rounded-md-xl w-[500px]">
+        <h2 className="text-3xl mb-4 font-bold">Sign in to you account</h2>
+        <div className="p-14 bg-white  shadow-lg rounded-md-xl w-[500px]">
           <form action="">
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
@@ -54,7 +70,7 @@ const Login = () => {
             <div className="text-center text-para">
               <p>Or Continue With</p>
               <button
-                // onClick={handleGoogleLogin}
+                onClick={handleGoogleLogin}
                 className="w-full border-2 rounded-md py-3 flex items-center justify-center cursor-pointer my-6 gap-4 lg:text-xl"
               >
                 <svg
