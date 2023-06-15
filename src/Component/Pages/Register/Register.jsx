@@ -9,7 +9,7 @@ import { AuthContext } from "../../AuthProiver/Authprovider";
 import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
-  const { registerUser, updateUserData, googleLogin } = useContext(AuthContext);
+  const { registerUser, updateUserData } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //  react hook form starts
@@ -28,7 +28,7 @@ const Register = () => {
     registerUser(email, password)
       .then((result) => {
         const loggedUser = result.user;
-        toast.success("Login Successful", {
+        toast.success("Register Successful", {
           style: {
             backgroundColor: "#FDC153",
             border: "3px solid #ffffff",
@@ -43,7 +43,7 @@ const Register = () => {
           },
         });
 
-        console.log(loggedUser, "this is lgged user");
+        console.log(loggedUser, "this is logged user");
         updateUserData(data.name, data.photo)
           .then(() => {
             const saveUser = { name: data.name, email: data.email, photo:data.photo, role: 'student' };
@@ -72,16 +72,7 @@ const Register = () => {
   };
 
   //  google authentication
-  const handleGoogleLogin = () => {
-    googleLogin()
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
-
-        navigate("/");
-      })
-      .catch((error) => console.log(error.message));
-  };
+  
 
   return (
     <div className=" px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-16 lg:px-8 lg:py-8">
@@ -216,7 +207,7 @@ const Register = () => {
             <Toaster />
             <div className="text-center text-para">
               <p>Or Continue With</p>
-              <button
+              {/* <button
                 onClick={handleGoogleLogin}
                 className="w-full border-2 rounded-md py-3 flex items-center justify-center cursor-pointer my-6 gap-4 lg:text-xl"
               >
@@ -249,7 +240,7 @@ const Register = () => {
                   />
                 </svg>
                 LOGIN WITH GOOGLE
-              </button>
+              </button> */}
             </div>
           </form>
         </div>
