@@ -5,16 +5,18 @@ import { MdEmail, MdFacebook, MdPhone } from "react-icons/md";
 import { AuthContext } from "../../AuthProiver/Authprovider";
 import logo from "../../../assets/logo.png";
 import { FaTwitter, FaYoutube } from "react-icons/fa";
+import { Tooltip } from "react-tooltip";
 
 const Header = () => {
-  const { user, handleLogout } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // const handleLogout = () => {
-  //   logOutUser()
-  //     .then((res) => console.log(res))
-  //     .catch((error) => console.log(error));
-  // };
+  const handleLogout = () => {
+    logOutUser()
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       {/* nav upper info */}
@@ -70,6 +72,7 @@ const Header = () => {
             </NavLink>
             <span className="py-6 bg-slate-400 px-[.5px]"></span>
             {/* profile login and dashboard */}
+
             {user ? (
               <>
                 <NavLink
@@ -81,19 +84,20 @@ const Header = () => {
                   <li>Dashboard</li>
                 </NavLink>
                 <li className="hidden lg:flex lg:items-center gap-3">
-                  {/* <img
-        src={user.photoURL}
-        className="rounded-full p-1 w-14 h-14 ring-2 ring-primary"
-        aria-label={user.displayName}
-        data-tooltip-id="my-tooltip"
-        data-tooltip-content={user.displayName}
-      /> */}
+                  <img
+                    src={user.photoURL}
+                    className="rounded-full p-1 w-14 h-14 ring-2 ring-primary"
+                    aria-label={user.displayName}
+                    data-tooltip-id="my-tooltip"
+                    data-tooltip-content={user.displayName}
+                  />
                   <NavLink to="/">
                     <button onClick={handleLogout} className="btn-primary">
                       Sign Out
                     </button>
                   </NavLink>
                 </li>
+                <Tooltip id="my-tooltip" />
               </>
             ) : (
               <li className="hidden lg:inline-block">

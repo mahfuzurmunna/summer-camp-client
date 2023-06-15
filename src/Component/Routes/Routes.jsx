@@ -8,6 +8,7 @@ import Loading from "../Pages/Loading/Loading";
 import Class from "../Pages/Class/Class";
 import Dashboard from "../Pages/Dashboard/Dashboard";
 import Instructors from "../Pages/Instructors/Instructors";
+import Privateroute from "./Privateroute";
 
 const router = createBrowserRouter([
   {
@@ -28,16 +29,20 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-       path: '/class',
-       element: <Class/>
+        path: "/class",
+        element: <Class />,
       },
       {
-        path: '/dashboard',
-        element: <Dashboard/>
+        path: "/dashboard",
+        element: (
+          <Privateroute>
+            <Dashboard />
+          </Privateroute>
+        ),
       },
       {
-        path: '/instructor',
-        element: <Instructors/>
+        path: "/instructor",
+        element: <Instructors />,
       },
       {
         path: "/loading",

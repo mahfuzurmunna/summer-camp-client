@@ -1,28 +1,127 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React from "react";
 import { useContext } from "react";
 import logo from "../../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProiver/Authprovider";
 
+import toast, { Toaster } from "react-hot-toast";
+
 const Register = () => {
-    const { registerUser  } = useContext(AuthContext);
-    
+  const { registerUser, updateUserData, googleLogin } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  //  react hook form starts
+  const {
+    register,
+    handleSubmit,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const password = watch("password");
+
+  // form submit function
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    registerUser(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        toast.success("Login Successful", {
+          style: {
+            backgroundColor: "#FDC153",
+            border: "3px solid #ffffff",
+            borderRadius: "30px",
+            padding: "16px",
+            color: "#ffffff",
+            fontSize: "20px",
+          },
+          iconTheme: {
+            primary: "#232413",
+            secondary: "#FFFAEE",
+          },
+        });
+
+        console.log(loggedUser, "this is lgged user");
+        updateUserData(data.name, data.photo)
+          .then(() => {
+            const saveUser = { name: data.name, email: data.email, photo:data.photo, role: 'student' };
+            console.log("user profile info updated");
+            fetch("http://localhost:5000/allusers" , {
+              method: "POST",
+              headers:{
+                'content-type' : 'application/json'
+              },
+              body: JSON.stringify(saveUser)
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.insertedId) {
+                  reset();
+                  navigate("/");
+                }
+              });
+           
+          })
+          .catch((error) => console.log(error.message));
+
+        console.log(loggedUser.displayName);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  //  google authentication
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+
+        navigate("/");
+      })
+      .catch((error) => console.log(error.message));
+  };
+
   return (
     <div className=" px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-16 lg:px-8 lg:py-8">
       <div className=" grid justify-items-center ">
         <img src={logo} alt="" className="mb-4" />
         <h2 className="text-3xl mb-4 font-bold">Sign in to you account</h2>
         <div className="p-14 bg-white  shadow-lg rounded-md-xl w-[500px]">
-          <form action="">
+          {/* form starts */}
+          <form onSubmit={handleSubmit(onSubmit)} action="">
+            <div className="mb-6">
+              <label htmlFor="" className="block mb-2">
+                Enter Your Name
+              </label>
+              <input
+                type="text"
+                {...register("name", { required: true })}
+                className="w-full border rounded-md p-2 outline-accent"
+              />
+              {errors.name && (
+                <span className="text-red-500 text-sm">
+                  {" "}
+                  This field is required
+                </span>
+              )}
+            </div>
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
                 Email Address
               </label>
               <input
                 type="email"
+                {...register("email", { required: true })}
                 className="w-full border rounded-md p-2 outline-accent"
               />
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {" "}
+                  This field is required
+                </span>
+              )}
             </div>
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
@@ -30,8 +129,22 @@ const Register = () => {
               </label>
               <input
                 type="password"
+                {...register("password", {
+                  required: true,
+                  pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                })}
                 className="w-full border rounded-md p-2 outline-accent"
               />
+              {errors.password?.type === "required" && (
+                <p className="text-red-500 text-sm">Password is required</p>
+              )}
+
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-500 text-sm">
+                  Password needs minimum eight characters, at least one capital
+                  letter and one number
+                </p>
+              )}
             </div>
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
@@ -40,7 +153,17 @@ const Register = () => {
               <input
                 type="password"
                 className="w-full border rounded-md p-2 outline-accent"
+                {...register("confirmPassword", {
+                  validate: (value) =>
+                    value === password || "Passwords do not match",
+                })}
               />
+              {errors.confirmPassword && (
+                <span className="text-red-500 text-sm">
+                  {" "}
+                  Password didnt match
+                </span>
+              )}
             </div>
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
@@ -49,7 +172,11 @@ const Register = () => {
               <input
                 type="text"
                 className="w-full border rounded-md p-2 outline-accent"
+                {...register("photo", { required: true })}
               />
+              {errors.photo && (
+                <span className="text-red-500"> Photo URL is required</span>
+              )}
             </div>
             <div className="mb-6">
               <label htmlFor="" className="block mb-2">
@@ -60,10 +187,10 @@ const Register = () => {
                 className="w-full select select-bordered rounded-md p-2 outline-accent"
                 name=""
                 id=""
-                defaultValue='Select Gender'
-                
+                defaultValue="Select Gender"
+                {...register("gender")}
               >
-                <option value="Select Gender"  disabled>
+                <option value="Select Gender" disabled>
                   {" "}
                   Select Gender
                 </option>
@@ -75,7 +202,7 @@ const Register = () => {
             <p className="text-para text-center mt-6">
               Already have an account?
               <Link
-                to="/register"
+                to="/login"
                 className="text-lg underline text-Primary font-bold"
               >
                 <> </> Login
@@ -86,10 +213,11 @@ const Register = () => {
               value="Register"
               className="w-full py-3 bg-accent text-white font-medium rounded-md my-8 cursor-pointer text-lg hover:bg-primary transition duration-200 shadow-md"
             />
+            <Toaster />
             <div className="text-center text-para">
               <p>Or Continue With</p>
               <button
-                // onClick={handleGoogleLogin}
+                onClick={handleGoogleLogin}
                 className="w-full border-2 rounded-md py-3 flex items-center justify-center cursor-pointer my-6 gap-4 lg:text-xl"
               >
                 <svg
