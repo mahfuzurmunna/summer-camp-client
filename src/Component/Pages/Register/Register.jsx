@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProiver/Authprovider";
 
 import toast, { Toaster } from "react-hot-toast";
+import Sociallogin from "../../Shared/Sociallogin/Sociallogin";
 
 const Register = () => {
   const { registerUser, updateUserData } = useContext(AuthContext);
@@ -241,6 +242,7 @@ const Register = () => {
                 </svg>
                 LOGIN WITH GOOGLE
               </button> */}
+              <Sociallogin/>
             </div>
           </form>
         </div>

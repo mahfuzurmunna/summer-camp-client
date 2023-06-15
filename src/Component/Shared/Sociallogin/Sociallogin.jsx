@@ -1,7 +1,8 @@
 import { useContext } from "react";
 
-import { AuthContext } from "../../../providers/AuthProvider";
+
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthProiver/Authprovider";
 
 const Sociallogin = () => {
    const {  googleLogin } = useContext(AuthContext);
@@ -30,10 +31,10 @@ const Sociallogin = () => {
            body: JSON.stringify(saveUser),
          })
            .then((res) => res.json())
-           .then((data) => {
-             if (data.insertedId) {
+           .then(() => {
+             
                   navigate(from, { replace: true });
-             }
+            
            });
        })
        .catch((error) => console.log(error.message));
