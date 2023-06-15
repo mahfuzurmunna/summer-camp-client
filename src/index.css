@@ -5,15 +5,16 @@
 
 :root{
   font-family: 'Open Sans', sans-serif;
+  color: #121212;
 
 }
 
 .active {
   @apply font-medium tracking-wide text-lg text-accent transition-colors duration-200;
 }
-/* .active2 {
+.active2 {
   @apply font-bold text-3xl tracking-wide text-accent transition-colors duration-200;
-} */
+}
 
 .default {
   @apply font-medium text-lg tracking-wide text-primary transition-colors relative;
@@ -39,7 +40,28 @@
 .btn-primary {
   @apply  transition duration-300  shadow-md  md:mb-0  px-4 py-2 md:px-11 md:py-3 m-2 text-xl rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-primary;
 }
-/* 
+.btn-secondary {
+  @apply  transition duration-300  shadow-md  md:mb-0  px-16 lg:px-5 py-2 md:px-8 md:py-4 m-2   text-lg rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-accent;
+}
+
+
 .default2 {
   @apply text-2xl tracking-wide text-white transition-colors duration-200 hover:text-accent;
-} */
+}
+
+.default2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #121212; 
+  transition-property: width;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.default2:hover::before {
+  width: 100%;
+}

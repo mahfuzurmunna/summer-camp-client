@@ -6,7 +6,7 @@ export default {
       colors: {
         primary: "#121212",
         accent: "#FFA500",
-        para: "#494949",
+        para: "#616161",
       },
       fontFamily: {
         open: ["'Open Sans", "san-serif"],
