@@ -8,6 +8,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import axios from "axios";
 import app from "../../../firebase.config";
 import { createContext, useEffect, useState } from "react";
 
@@ -53,6 +54,20 @@ const Authprovider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (LoggedInUser) => {
       setUser(LoggedInUser);
       setLoading(false);
+
+       if (LoggedInUser) {
+         axios
+           .post("https://hello-summer-server-two.vercel.app/jwt", {
+             email: LoggedInUser.email,
+           })
+           .then((data) => {
+             // console.log(data.data.token)
+             localStorage.setItem("access-token", data.data.token);
+             setLoading(false);
+           });
+       } else {
+         localStorage.removeItem("access-token");
+       }
     });
 
     return () => {

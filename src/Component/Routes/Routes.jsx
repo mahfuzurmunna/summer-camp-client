@@ -12,6 +12,10 @@ import Privateroute from "./Privateroute";
 import Admin from "../Pages/Dashboard/Admin/Admin";
 import Manageuser from "../Pages/Dashboard/Admin/Manageuser";
 import Manageclass from "../Pages/Dashboard/Admin/Manageclass";
+import Addclass from "../Pages/Dashboard/InstructorDashboard/Addclass";
+import Myclass from "../Pages/Dashboard/InstructorDashboard/Myclass";
+
+
 
 
 const router = createBrowserRouter([
@@ -66,6 +70,14 @@ const router = createBrowserRouter([
       {
         path: "class",
         element: <Manageclass />,
+      },
+      {
+        path: "myclass",
+        element: <Myclass/>,
+      },
+      {
+        path: "addclass",
+        element: <Addclass/>,
       },
     ],
   },

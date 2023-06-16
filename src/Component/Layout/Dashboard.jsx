@@ -1,10 +1,17 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { MdClass, MdSupervisedUserCircle } from "react-icons/md";
+import { BsFillBookmarkStarFill } from "react-icons/bs";
+import { MdAssignmentAdd,MdClass, MdSupervisedUserCircle } from "react-icons/md";
+
 import { Link, Outlet } from 'react-router-dom';
 import logo from "../../assets/logo.png";
+import MyAdmin from '../../Custom Hooks/MyAdmin';
+
 
 const Dashboard = () => {
+
+  const [isAdmin] = MyAdmin()
+  console.log(isAdmin, "this is admin or not")
   return (
     <div className="drawer lg:drawer-open ">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -15,7 +22,7 @@ const Dashboard = () => {
         >
           Open drawer
         </label>
-        <Outlet/>
+        <Outlet />
       </div>
       <div className="drawer-side bg-slate-100 ">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
@@ -53,6 +60,30 @@ const Dashboard = () => {
                 <MdSupervisedUserCircle />
               </span>
               Manage Users
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/dashboard/addclass"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-2xl">
+                <MdAssignmentAdd />
+              </span>
+              Add a Class
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/dashboard/myclass"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-2xl">
+                <BsFillBookmarkStarFill/>
+              </span>
+              My Classes
             </Link>
           </li>
         </ul>

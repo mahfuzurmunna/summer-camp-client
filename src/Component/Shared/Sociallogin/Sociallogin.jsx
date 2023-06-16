@@ -1,44 +1,40 @@
 import { useContext } from "react";
 
-
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProiver/Authprovider";
 
 const Sociallogin = () => {
-   const {  googleLogin } = useContext(AuthContext);
-   const location = useLocation();
-   let navigate = useNavigate();
+  const { googleLogin } = useContext(AuthContext);
+  const location = useLocation();
+  let navigate = useNavigate();
 
-    const from = location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
 
-
-   const handleGoogleLogin = () => {
-     googleLogin()
-       .then((result) => {
-         const user = result.user;
-         console.log(user);
-         const saveUser = {
-           name: user.displayName,
-           email: user.email,
-           photo: user.photoURL,
-           role: "student",
-         };
-         fetch("http://localhost:5000/allusers", {
-           method: "POST",
-           headers: {
-             "content-type": "application/json",
-           },
-           body: JSON.stringify(saveUser),
-         })
-           .then((res) => res.json())
-           .then(() => {
-             
-                  navigate(from, { replace: true });
-            
-           });
-       })
-       .catch((error) => console.log(error.message));
-   };
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        const saveUser = {
+          name: user.displayName,
+          email: user.email,
+          photo: user.photoURL,
+          role: "student",
+        };
+        fetch("http://localhost:5000/allusers", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            navigate(from, { replace: true });
+          });
+      })
+      .catch((error) => console.log(error.message));
+  };
   return (
     <>
       <button

@@ -94,7 +94,11 @@ const Manageuser = () => {
 
                   <td>
                     <button
-                      className="btn-primary"
+                      className={
+                        user.role === 'instructor'
+                          ? "bg-slate-100 border-2 disabled text-primary"
+                          : "bg-accent p-3 rounded-lg text-white font-semibold text-base"
+                      }
                       onClick={() => {
                         handleInstructor(user._id);
                       }}
@@ -105,7 +109,7 @@ const Manageuser = () => {
                   </td>
                   <td>
                     <button
-                      className="btn-primary"
+                      className="bg-accent p-3 rounded-lg text-white font-semibold text-base"
                       onClick={() => {
                         handleAdmin(user._id);
                       }}
