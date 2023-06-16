@@ -16,6 +16,7 @@ import Addclass from "../Pages/Dashboard/InstructorDashboard/Addclass";
 import Myclass from "../Pages/Dashboard/InstructorDashboard/Myclass";
 import Myselectedclasses from "../Pages/Dashboard/Student/Myselectedclasses";
 import Myenrolledclass from "../Pages/Dashboard/Student/Myenrolledclass";
+import Sendfeedback from "../Pages/Dashboard/Admin/Sendfeedback";
 
 
 
@@ -71,20 +72,26 @@ const router = createBrowserRouter([
       },
       {
         path: "myclass",
-        element: <Myclass/>,
+        element: <Myclass />,
       },
       {
         path: "addclass",
-        element: <Addclass/>,
+        element: <Addclass />,
       },
       {
-        path: 'selectedclass',
-        element: <Myselectedclasses/>
+        path: "selectedclass",
+        element: <Myselectedclasses />,
       },
       {
-        path: 'enrolledclass',
-        element: <Myenrolledclass/>
-      }
+        path: "enrolledclass",
+        element: <Myenrolledclass />,
+      },
+      {
+        path: "feedback/:id",
+        element: <Sendfeedback/>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allclasses/sendfeedback/${params.id}`),
+      },
     ],
   },
 ]);
