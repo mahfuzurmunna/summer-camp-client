@@ -9,11 +9,13 @@ import Class from "../Pages/Class/Class";
 import Dashboard from "../Layout/Dashboard";
 import Instructors from "../Pages/Instructors/Instructors";
 import Privateroute from "./Privateroute";
-import Admin from "../Pages/Dashboard/Admin/Admin";
+
 import Manageuser from "../Pages/Dashboard/Admin/Manageuser";
 import Manageclass from "../Pages/Dashboard/Admin/Manageclass";
 import Addclass from "../Pages/Dashboard/InstructorDashboard/Addclass";
 import Myclass from "../Pages/Dashboard/InstructorDashboard/Myclass";
+import Myselectedclasses from "../Pages/Dashboard/Student/Myselectedclasses";
+import Myenrolledclass from "../Pages/Dashboard/Student/Myenrolledclass";
 
 
 
@@ -60,10 +62,6 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "admin",
-        element: <Admin />,
-      },
-      {
         path: "user",
         element: <Manageuser />,
       },
@@ -79,6 +77,14 @@ const router = createBrowserRouter([
         path: "addclass",
         element: <Addclass/>,
       },
+      {
+        path: 'selectedclass',
+        element: <Myselectedclasses/>
+      },
+      {
+        path: 'enrolledclass',
+        element: <Myenrolledclass/>
+      }
     ],
   },
 ]);

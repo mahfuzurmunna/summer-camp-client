@@ -38,6 +38,7 @@ const Dashboard = () => {
           <span className="text-slate-400 text-base p-3 font-medium border-b-2">
             MAIN MENU
           </span>
+          {/* admin pages */}
           <li>
             <Link
               to="/dashboard/class"
@@ -62,6 +63,8 @@ const Dashboard = () => {
               Manage Users
             </Link>
           </li>
+
+          {/* instructor pages */}
           <li>
             <Link
               to="/dashboard/addclass"
@@ -81,9 +84,35 @@ const Dashboard = () => {
             >
               {" "}
               <span className="text-2xl">
-                <BsFillBookmarkStarFill/>
+                <BsFillBookmarkStarFill />
               </span>
               My Classes
+            </Link>
+          </li>
+
+          {/* student pages */}
+          <li>
+            <Link
+              to="/dashboard/selectedclass"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-2xl">
+                <BsFillBookmarkStarFill />
+              </span>
+              My Selected Classes
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/dashboard/enrolledclass"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-2xl">
+                <BsFillBookmarkStarFill />
+              </span>
+              My Enrolled Classes
             </Link>
           </li>
         </ul>
