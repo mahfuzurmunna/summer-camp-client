@@ -1,7 +1,13 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { BsFillBookmarkStarFill } from "react-icons/bs";
-import { MdAssignmentAdd,MdClass, MdSupervisedUserCircle } from "react-icons/md";
+
+import { BsFillBookmarkStarFill, BsClipboardCheckFill } from "react-icons/bs";
+import {
+  MdAssignmentAdd,
+  MdClass,
+  MdSupervisedUserCircle,
+  MdFileOpen,
+} from "react-icons/md";
 
 import { Link, Outlet } from 'react-router-dom';
 import logo from "../../assets/logo.png";
@@ -13,7 +19,7 @@ const Dashboard = () => {
   const [isAdmin] = MyAdmin()
   console.log(isAdmin, "this is admin or not")
   return (
-    <div className="drawer lg:drawer-open ">
+    <div className="drawer lg:drawer-open text-primary">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center ">
         <label
@@ -98,7 +104,7 @@ const Dashboard = () => {
             >
               {" "}
               <span className="text-2xl">
-                <BsFillBookmarkStarFill />
+                <BsClipboardCheckFill />
               </span>
               My Selected Classes
             </Link>
@@ -110,7 +116,7 @@ const Dashboard = () => {
             >
               {" "}
               <span className="text-2xl">
-                <BsFillBookmarkStarFill />
+                <MdFileOpen />
               </span>
               My Enrolled Classes
             </Link>
