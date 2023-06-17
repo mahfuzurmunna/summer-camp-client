@@ -47,14 +47,19 @@ const Register = () => {
         console.log(loggedUser, "this is logged user");
         updateUserData(data.name, data.photo)
           .then(() => {
-            const saveUser = { name: data.name, email: data.email, photo:data.photo, role: 'student' };
+            const saveUser = {
+              name: data.name,
+              email: data.email,
+              photo: data.photo,
+              role: "student",
+            };
             console.log("user profile info updated");
-            fetch("http://localhost:5000/allusers" , {
+            fetch("http://localhost:5000/allusers", {
               method: "POST",
-              headers:{
-                'content-type' : 'application/json'
+              headers: {
+                "content-type": "application/json",
               },
-              body: JSON.stringify(saveUser)
+              body: JSON.stringify(saveUser),
             })
               .then((res) => res.json())
               .then((data) => {
@@ -63,7 +68,6 @@ const Register = () => {
                   navigate("/");
                 }
               });
-           
           })
           .catch((error) => console.log(error.message));
 
@@ -73,7 +77,6 @@ const Register = () => {
   };
 
   //  google authentication
-  
 
   return (
     <div className=" px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-16 lg:px-8 lg:py-8">
@@ -123,7 +126,8 @@ const Register = () => {
                 type="password"
                 {...register("password", {
                   required: true,
-                  pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                  pattern:
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
                 })}
                 className="w-full border rounded-md p-2 outline-accent"
               />
@@ -133,8 +137,8 @@ const Register = () => {
 
               {errors.password?.type === "pattern" && (
                 <p className="text-red-500 text-sm">
-                  Password needs minimum eight characters, at least one capital
-                  letter and one number
+                  Password needs Minimum eight characters, at least one letter,
+                  one number and one special character.
                 </p>
               )}
             </div>
@@ -242,7 +246,7 @@ const Register = () => {
                 </svg>
                 LOGIN WITH GOOGLE
               </button> */}
-              <Sociallogin/>
+              <Sociallogin />
             </div>
           </form>
         </div>

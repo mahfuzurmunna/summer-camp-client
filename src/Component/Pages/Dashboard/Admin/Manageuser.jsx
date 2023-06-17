@@ -57,7 +57,7 @@ const Manageuser = () => {
         <div className="overflow-x-auto">
           <table className="table border border-bg2">
             {/* head */}
-            <thead className="bg-slate-800">
+            <thead className="bg-primary">
               <tr className="rehn-normal text-white text-base underline">
                 <th></th>
                 <th>Image</th>
@@ -95,9 +95,9 @@ const Manageuser = () => {
                   <td>
                     <button
                       className={
-                        user.role === 'instructor'
-                          ? "bg-slate-100 border-2 disabled text-primary"
-                          : "bg-accent p-3 rounded-lg text-white font-semibold text-base"
+                        user.role === "instructor"
+                          ? "bg-slate-100 border-2 disabled text-primary px-4 py-2 rounded-lg cursor-not-allowed"
+                          : "bg-teal-600 px-4 py-2 rounded-lg text-white font-semibold text-base"
                       }
                       onClick={() => {
                         handleInstructor(user._id);
@@ -109,7 +109,11 @@ const Manageuser = () => {
                   </td>
                   <td>
                     <button
-                      className="bg-accent p-3 rounded-lg text-white font-semibold text-base"
+                      className={
+                        user.role === "admin"
+                          ? "bg-slate-100 border-2 disabled text-primary px-4 py-2 rounded-lg cursor-not-allowed"
+                          : "bg-pink-700 px-4 py-2 rounded-lg text-white font-semibold text-base"
+                      }
                       onClick={() => {
                         handleAdmin(user._id);
                       }}

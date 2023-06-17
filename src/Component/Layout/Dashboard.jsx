@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-
 import { BsFillBookmarkStarFill, BsClipboardCheckFill } from "react-icons/bs";
 import {
   MdAssignmentAdd,
   MdClass,
   MdSupervisedUserCircle,
   MdFileOpen,
+  MdHomeFilled
 } from "react-icons/md";
-
+import { FaChalkboardTeacher } from "react-icons/fa";
+import { SiCoursera } from "react-icons/si";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import MyAdmin from "../../Custom Hooks/MyAdmin";
@@ -105,35 +106,74 @@ const Dashboard = () => {
             </>
           )}
           {/* student pages */}
-          {!isAdmin &&
-            !isInstructor && (
-              <>
-                <li>
-                  <Link
-                    to="/dashboard/selectedclass"
-                    className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-                  >
-                    {" "}
-                    <span className="text-2xl">
-                      <BsClipboardCheckFill />
-                    </span>
-                    My Selected Classes
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/dashboard/enrolledclass"
-                    className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-                  >
-                    {" "}
-                    <span className="text-2xl">
-                      <MdFileOpen />
-                    </span>
-                    My Enrolled Classes
-                  </Link>
-                </li>
-              </>
-            )}
+          {!isAdmin && !isInstructor && (
+            <>
+              <li>
+                <Link
+                  to="/dashboard/selectedclass"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <BsClipboardCheckFill />
+                  </span>
+                  My Selected Classes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard/enrolledclass"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <MdFileOpen />
+                  </span>
+                  My Enrolled Classes
+                </Link>
+              </li>
+            </>
+          )}
+
+          <span className="text-slate-400 text-base p-3 font-medium border-b-2">
+            Other Pages
+          </span>
+          <li>
+            <Link
+              to="/"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-3xl">
+                <MdHomeFilled />
+              </span>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/instructor"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-3xl">
+                <FaChalkboardTeacher />
+              </span>
+              Instructors
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/class"
+              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+            >
+              {" "}
+              <span className="text-3xl">
+                <SiCoursera />
+              </span>
+              Classes
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

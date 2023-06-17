@@ -1,17 +1,20 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../../../assets/logo.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProiver/Authprovider";
 import toast, { Toaster } from "react-hot-toast";
 import Sociallogin from "../../Shared/Sociallogin/Sociallogin";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const { loginUser } = useContext(AuthContext);
   const location = useLocation();
    let navigate = useNavigate();
   const from = location.state?.from.pathname || "/";
+  const [showPassword, setShowPassword] = useState(false);
+
  
 
   //  react hook form starts
@@ -48,6 +51,11 @@ const Login = () => {
       })
       .catch((error) => console.log(error.message));
   };
+
+    const handleTogglePassword = () => {
+      setShowPassword(!showPassword);
+    };
+
   
   return (
     <div className=" px-4 py-8 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-16 lg:px-8 lg:py-8">
@@ -70,17 +78,28 @@ const Login = () => {
                 <span className="text-red-500"> This field is required</span>
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-6 relative">
               <label htmlFor="" className="block mb-2">
                 Password
               </label>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="w-full border rounded-md p-2 outline-accent"
                 {...register("password", {
                   required: true,
                 })}
               />
+              <button
+                type="button"
+                onClick={handleTogglePassword}
+                className="absolute top-11 right-3 transform  text-gray-400"
+              >
+                {showPassword ? (
+                  <AiFillEye className="h-5 w-5" />
+                ) : (
+                  <AiFillEyeInvisible className="h-5 w-5" />
+                )}
+              </button>
               {errors.password?.type === "required" && (
                 <p className="text-red-500">Password is required</p>
               )}
@@ -111,7 +130,7 @@ const Login = () => {
             <Toaster />
             <div className="text-center text-para">
               <p>Or Continue With</p>
-           <Sociallogin/>
+              <Sociallogin />
             </div>
           </form>
         </div>

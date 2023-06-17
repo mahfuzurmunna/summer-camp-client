@@ -128,7 +128,7 @@ const Manageclass = () => {
                         className={
                           cl.status === "feedback"
                             ? "bg-slate-100 border-2 disabled text-primary px-4 py-2 rounded-lg cursor-not-allowed"
-                            : "bg-accent px-4 py-2 rounded-lg text-white font-semibold text-base"
+                            : "bg-indigo-500 px-4 py-2 rounded-lg text-white font-semibold text-base"
                         }
                       >
                         Feedback
