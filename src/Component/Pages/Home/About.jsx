@@ -27,12 +27,12 @@ const About = () => {
   return (
     <div
       id="about-section"
-      className="w-[1150px]  mx-auto md:my-32 my-24 lg:my-44 "
+      className="lg:w-[1150px]  w-full  mx-auto md:my-32 my-24 lg:my-44 "
     >
       <div className="flex flex-col md:flex-row justify-between md:gap-14 gap-3 lg:gap-28 pl-4">
         <div className="w-full">
           <p className="text-accent text-base mb-4 font-medium">ABOUT US</p>
-          <h1 className=" text-2xl w-1/3 lg:w-full  lg:text-[52px] leading-[1.2] font-bold text-primary ">
+          <h1 className=" text-2xl w-full lg:w-full  lg:text-[52px] leading-[1.2] font-bold text-primary ">
             We Help You to Grow Faster and Better
           </h1>
           <img
@@ -42,7 +42,7 @@ const About = () => {
           />
         </div>
         <div className="w-full">
-          <p className=" w-[30%] lg:w-full pt-8 text-base  text-para tracking-wide leading-relaxed lg:text-lg text-justify">
+          <p className=" w-full pr-4 lg:w-full pt-8 text-base  text-para tracking-wide leading-relaxed lg:text-lg text-justify">
             We are your dedicated partners in growth, empowering you to
             accelerate and enhance your progress. With our extreme guidance and
             support, youll experience a transformative journey towards achieving
