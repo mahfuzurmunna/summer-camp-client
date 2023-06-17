@@ -193,6 +193,45 @@ const Header = () => {
                           Classes
                         </NavLink>
                       </li>
+                      <hr className="bg-white w-1/3 mx-auto" />
+                      <li>
+                        {user ? (
+                          <>
+                            <NavLink
+                              to="/dashboard"
+                              className={({ isActive }) =>
+                                isActive ? "active2" : "default2"
+                              }
+                            >
+                              Dashboard
+                            </NavLink>
+                            <li className="flex flex-col items-center gap-4 mt-6">
+                              <img
+                                src={user.photoURL}
+                                className="rounded-full p-1 w-14 h-14 ring-2 ring-primary"
+                                aria-label={user.displayName}
+                                data-tooltip-id="my-tooltip"
+                                data-tooltip-content={user.displayName}
+                              />
+                              <NavLink to="/">
+                                <button
+                                  onClick={handleLogout}
+                                  className="btn-secondary "
+                                >
+                                  Sign Out
+                                </button>
+                              </NavLink>
+                            </li>
+                            <Tooltip id="my-tooltip" />
+                          </>
+                        ) : (
+                          <li className="hidden lg:inline-block">
+                            <NavLink to="/login">
+                              <button className="btn-primary">Login</button>
+                            </NavLink>
+                          </li>
+                        )}
+                      </li>
                     </ul>
                   </nav>
                 </div>
