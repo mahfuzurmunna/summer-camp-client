@@ -36,6 +36,17 @@
   width: 100%;
 }
 
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7px;
+  border-radius: 10px;
+  background: var(--red);
+  transform-origin: 0%;
+    background-color: rgb(235, 181, 67) !important;
+}
 
 .btn-primary {
   @apply  transition duration-300  shadow-md  md:mb-0  px-4 py-2 md:px-11 md:py-3 m-2 text-xl rounded-lg border-transparent border-2 text-white hover:border-primary hover:bg-transparent hover:text-primary font-semibold bg-primary;
