@@ -3,7 +3,7 @@
 
 const ClassSection = ({cl}) => {
   console.log(cl);
-  const {classImage,className, instructorName, seats, price } = cl;
+  const {classImage,className, instructorName, seats } = cl;
 
   return (
     <div className="hover:scale-105 transition duration-500  mt-12 px-2">
@@ -13,9 +13,9 @@ const ClassSection = ({cl}) => {
         alt=""
       />
       <h2 className="font-bold text-2xl mt-4 mb-2">{className}</h2>
-      <p className="text-para text-base">{instructorName}</p>
-      <p className="text-para text-base">{seats}</p>
-      <p className="text-para text-base">{price}</p>
+      <p className="text-para text-base">Instructor: {instructorName}</p>
+      <p className="text-para text-base">Available Seat: {seats}</p>
+      <p className="text-para text-base">Instructor: {instructorName}</p>
     </div>
   );
 };

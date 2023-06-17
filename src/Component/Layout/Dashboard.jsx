@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React from "react";
 
 import { BsFillBookmarkStarFill, BsClipboardCheckFill } from "react-icons/bs";
 import {
@@ -9,15 +9,15 @@ import {
   MdFileOpen,
 } from "react-icons/md";
 
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import MyAdmin from '../../Custom Hooks/MyAdmin';
-
+import MyAdmin from "../../Custom Hooks/MyAdmin";
+import MyInstructor from "../../Custom Hooks/MyInstructor";
 
 const Dashboard = () => {
-
-  const [isAdmin] = MyAdmin()
-  console.log(isAdmin, "this is admin or not")
+  const [isAdmin] = MyAdmin();
+  const [isInstructor] = MyInstructor();
+  console.log(isInstructor, "this is instructor or not");
   return (
     <div className="drawer lg:drawer-open text-primary">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -45,82 +45,95 @@ const Dashboard = () => {
             MAIN MENU
           </span>
           {/* admin pages */}
-          <li>
-            <Link
-              to="/dashboard/class"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <MdClass />
-              </span>
-              Manage Classes
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/user"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <MdSupervisedUserCircle />
-              </span>
-              Manage Users
-            </Link>
-          </li>
+          {isAdmin && (
+            <>
+              <li>
+                <Link
+                  to="/dashboard/class"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <MdClass />
+                  </span>
+                  Manage Classes
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard/user"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <MdSupervisedUserCircle />
+                  </span>
+                  Manage Users
+                </Link>
+              </li>
+            </>
+          )}
 
           {/* instructor pages */}
-          <li>
-            <Link
-              to="/dashboard/addclass"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <MdAssignmentAdd />
-              </span>
-              Add a Class
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/myclass"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <BsFillBookmarkStarFill />
-              </span>
-              My Classes
-            </Link>
-          </li>
 
+          {isInstructor && (
+            <>
+              <li>
+                <Link
+                  to="/dashboard/addclass"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <MdAssignmentAdd />
+                  </span>
+                  Add a Class
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/dashboard/myclass"
+                  className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                >
+                  {" "}
+                  <span className="text-2xl">
+                    <BsFillBookmarkStarFill />
+                  </span>
+                  My Classes
+                </Link>
+              </li>
+            </>
+          )}
           {/* student pages */}
-          <li>
-            <Link
-              to="/dashboard/selectedclass"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <BsClipboardCheckFill />
-              </span>
-              My Selected Classes
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/dashboard/enrolledclass"
-              className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
-            >
-              {" "}
-              <span className="text-2xl">
-                <MdFileOpen />
-              </span>
-              My Enrolled Classes
-            </Link>
-          </li>
+          {!isAdmin &&
+            !isInstructor && (
+              <>
+                <li>
+                  <Link
+                    to="/dashboard/selectedclass"
+                    className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                  >
+                    {" "}
+                    <span className="text-2xl">
+                      <BsClipboardCheckFill />
+                    </span>
+                    My Selected Classes
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/dashboard/enrolledclass"
+                    className="text-xl font-semibold hover:bg-slate-200 rounded-lg p-3"
+                  >
+                    {" "}
+                    <span className="text-2xl">
+                      <MdFileOpen />
+                    </span>
+                    My Enrolled Classes
+                  </Link>
+                </li>
+              </>
+            )}
         </ul>
       </div>
     </div>
