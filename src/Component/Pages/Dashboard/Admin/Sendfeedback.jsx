@@ -7,9 +7,6 @@ const Sendfeedback = () => {
     const {
       register,
       handleSubmit,
-      reset,
-      watch,
-      formState: { errors },
     } = useForm();
  const handleFeedback = (id, newData) => {
    console.log(id);
